@@ -1,8 +1,12 @@
 directory ?= system.pwd()
 
+pwd = system.pwd()
+system.cd(directory)
 switch
 	case(exists("pom.xml"))
+		echo("Creating eclipse project for: ${directory}")
 		system.mvn("eclipse:eclipse")
 	default
 		for (file : file.list(directoryRegex: ".*"))
 			maven.eclipse(file)
+system.cd(pwd)
