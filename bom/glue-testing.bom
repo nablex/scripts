@@ -1,0 +1,16 @@
+{ 
+	"import": [
+		"glue-basic"
+	],
+	"repository": [
+		{ "name": "github", "endpoint": "https://github.com/nablex" },
+		{ "name": "bucket", "endpoint": "https://bitbucket.org/nablex" }
+	],
+	"project": [
+		{ "name": "glue-selenese" },
+		{ "name": "glue-soapui" },
+		{ "name": "glue-images" },
+		{ "name": "glue-pdf" }
+	]
+}
+

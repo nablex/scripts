@@ -1,0 +1,21 @@
+{ 
+	"import": [
+		"http-server", "http-client", "types"
+	],
+	"repository": [
+		{ "name": "github", "endpoint": "https://github.com/nablex" },
+		{ "name": "bucket", "endpoint": "https://bitbucket.org/nablex" }
+	],
+	"project": [
+		{ "name": "eai-broker", "repository": "bucket" },
+		{ "name": "tasks-api"},
+		{ "name": "tasks-remote", "repository": "bucket" },
+		{ "name": "tasks-queues-database", "repository": "bucket" },
+		{ "name": "tasks-queues-cache", "repository": "bucket" },
+		{ "name": "datastore-api" },
+		{ "name": "datastore-resources" },
+		{ "name": "datastore-urn-database" }
+	]
+}
+
+

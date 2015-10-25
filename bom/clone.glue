@@ -1,0 +1,65 @@
+bom ?= null
+
+# Find all the bom files on the system
+all = retain(".*\.bom$", lines(system.locate("bom")))
+
+bomFile = null
+for (file : all)
+	if (file ~ "(^|.*/)" + bom + "\.bom$")
+		bomFile = file
+		break
+		
+confirmNotNull("The bom file must exist on the system", bomFile)
+
+content = string(read(bomFile), false)
+
+# Support both xml and json defined boms
+switch
+	case(content ~ "(?s)^[\s]*<.*")
+		content = xml.objectify(content)
+	default
+		content = json.objectify(content)
+
+# First load the imports
+for (import : content/import)
+	bom.clone(import)
+	
+for (project : content/project)
+	switch(exists(project/name))
+		case(true)
+			echo("Skipping ${project/name}")
+		default
+			repository = project/repository
+	
+			# Assume first (primary) repository
+			if (repository == null)
+				repository = content/repository[0]/name
+
+			endpoint = first(content/repository[name == /repository]/endpoint)
+
+			user = first(users[repository == /repository]/user)
+	
+			if (user == null)
+				user = system.input("Existing user for " + endpoint + ": ")
+				users = array(users, structure(repository: repository, user: user))
+
+			if (user != null)
+				endpoint = replace("://", "://" + user + "@", endpoint)
+	
+			echo("Cloning ${project/name} [${endpoint}]")
+	
+			switch(endpoint)
+				case(null)
+					echo("\tCan not resolve repository: ${project/repository}")
+				default
+					branch = project/branch
+					if (branch == null)
+						branch = "master"
+					system.git("clone", endpoint + "/" + project/name, project/name)
+					# go into the project
+					system.cd(project/name)
+					# go into the correct branch
+					system.git("branch", branch)
+					# go out of the project again
+					system.cd("..")
+	

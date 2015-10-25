@@ -1,0 +1,25 @@
+{ 
+	"repository": [
+		{ "name": "github", "endpoint": "https://github.com/nablex" },
+		{ "name": "bucket", "endpoint": "https://bitbucket.org/nablex" }
+	],
+	"project": [
+		{ "name": "authentication-api" },
+		{ "name": "authentication-resources" },
+		{ "name": "authentication-database", "repository": "bucket" },
+		{ "name": "utils-io" },
+		{ "name": "utils-codec" },
+		{ "name": "utils-mime" },
+		{ "name": "utils-security" },
+		{ "name": "utils-security-resources" },
+		{ "name": "resources-api" },
+		{ "name": "resources-memory" },
+		{ "name": "events-api" },
+		{ "name": "events-impl" },
+		{ "name": "http-api" },
+		{ "name": "http-core" },
+		{ "name": "http-server" },
+		{ "name": "http-server-rest" }
+	]
+}
+

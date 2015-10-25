@@ -1,0 +1,12 @@
+{ 
+	"import": [
+		"glue-basic", "http-server"
+	],
+	"repository": [
+		{ "name": "github", "endpoint": "https://github.com/nablex" }
+	],
+	"project": [
+		{ "name": "http-glue" },
+		{ "name": "glue-http-server" }
+	]
+}

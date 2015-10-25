@@ -1,0 +1,23 @@
+{ 
+	"repository": [
+		{ "name": "github", "endpoint": "https://github.com/nablex" }
+	],
+	"project": [
+		{ "name": "authentication-api" },
+		{ "name": "authentication-resources" },
+		{ "name": "authentication-database" },
+		{ "name": "utils-io" },
+		{ "name": "utils-codec" },
+		{ "name": "utils-mime" },
+		{ "name": "utils-security" },
+		{ "name": "resources-api" },
+		{ "name": "resources-memory" },
+		{ "name": "events-api" },
+		{ "name": "events-impl" },
+		{ "name": "http-api" },
+		{ "name": "http-core" },
+		{ "name": "http-client" },
+		{ "name": "http-client-ntlm" }
+	]
+}
+

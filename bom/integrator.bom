@@ -1,0 +1,38 @@
+{ 
+	"import": [
+		"glue-basic", "http-server", "broker", "types", "http-client"
+	],
+	"repository": [
+		{ "name": "bucket", "endpoint": "https://bitbucket.org/nablex" },
+		{ "name": "github", "endpoint": "https://github.com/nablex" }
+	],
+	"project": [
+		{ "name": "artifacts-jdbc" },
+		{ "name": "artifacts-jdbc-postgresql" },
+		{ "name": "artifacts-maven" },
+		{ "name": "eai-broker" },
+		{ "name": "maven-repository", "repository": "github" },
+		{ "name": "maven-server" },
+		
+		{ "name": "datatransactions-api", "repository": "github" },
+		{ "name": "datatransactions-database", "repository": "github" },
+		{ "name": "channels-api", "repository": "github" },
+		{ "name": "channels-resources", "repository": "github" },
+		
+		{ "name": "services-api", "branch": "develop" },
+		{ "name": "services-cache" },
+		{ "name": "services-jdbc" },
+		{ "name": "services-pojo" },
+		{ "name": "services-vm", "branch": "develop" },
+		{ "name": "services-wsdl" },
+		{ "name": "services-xslt" },
+		{ "name": "glue-services" },
+		{ "name": "http-glue", "repository": "github" },
+		{ "name": "eai-api" },
+		{ "name": "eai-repository" },
+		{ "name": "eai-server" },
+		{ "name": "eai-services" }
+	]
+}
+
+

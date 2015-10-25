@@ -1,0 +1,8 @@
+directory ?= system.pwd()
+
+switch
+	case(exists("pom.xml"))
+		system.mvn("eclipse:eclipse")
+	default
+		for (file : file.list(directoryRegex: ".*"))
+			maven.eclipse(file)

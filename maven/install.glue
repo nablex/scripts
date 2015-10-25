@@ -1,0 +1,63 @@
+force ?= false
+directory ?= system.pwd()
+lib ?= environment("libs.directory")
+showMavenOutput ?= true
+user = system.whoami()
+
+# The system commands work on the directory, so keep the current one
+pwd = system.pwd()
+# Go to the requested directory
+system.cd(directory)
+
+switch
+	case(exists("pom.xml"))
+		pom = string(read("pom.xml"), false)
+		artifactId = xpath(pom, "project/artifactId")
+		groupId = xpath(pom, "project/groupId")
+		version = xpath(pom, "project/version")
+		
+		requiresCleaning = true
+		if (!force && exists("target/" + artifactId + "-" + version + ".jar"))
+			requiresCleaning = false
+			lastBuilt = file.modified("target/" + artifactId + "-" + version + ".jar")
+			for (file : file.list(fileRegex: ".*\.java$", recursive: true))
+				if (file.modified(file) > lastBuilt)
+					requiresCleaning = true
+					break
+
+		switch (requiresCleaning)
+			case(true)
+				echo("Installing: " + artifactId + " [" + version + "]")
+				result = system.mvn("clean", "install")
+				switch
+					case (result ~ "(?s).*BUILD SUCCESS.*")
+						if(lib != null)
+							echo("Releasing: " + artifactId + " [" + version + "]")
+							for (dependency : maven.dependencies()/dependencies)
+								switch(exists(lib + "/" + dependency/artifactId + "-" + dependency/version + ".jar"))
+									case (false)
+										mavenPath = "/home/" + user + "/.m2/repository/" + replace("\.", "/", dependency/groupId) + "/" + dependency/artifactId + "/" + dependency/version + "/" + dependency/artifactId + "-" + dependency/version + "." + dependency/packaging
+										switch(exists(mavenPath))
+											case(false)
+												echo("\tMissing dependency: ${dependency/artifactId} [${dependency/version}]")
+											default
+												echo("\tCreating symbolic link in ${lib} for ${dependency/artifactId} - ${dependency/version}")
+												system.ln("-s", mavenPath, lib + "/" + dependency/artifactId + "-" + dependency/version + "." + dependency/packaging)
+									default
+										echo("\tSkipping dependency ${dependency/artifactId} [${dependency/version}]")
+					default
+						switch(showMavenOutput)
+							case(true)
+								echo(result)
+							default
+								echo("\tBuild failed")
+			default
+				echo("Skipping: " + artifactId + " [" + version + "]")
+	default
+		# Don't show maven output if going recursive (too much output)
+		for (file : file.list(directoryRegex: ".*"))
+			maven.install(force, file, lib, false)
+
+
+# Return to the original directory
+system.cd(pwd)

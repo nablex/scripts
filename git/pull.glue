@@ -1,0 +1,14 @@
+directory ?= system.pwd()
+
+pwd = system.pwd()
+
+system.cd(directory)
+switch
+	case(exists("pom.xml"))
+		branch = replace("^\*[\s]*", "", first(retain("^*.*", lines(system.git("branch")))))
+		echo("Pulling branch: ${branch}")
+		echo(system.git("pull", "origin", branch))
+	default
+		for (file : file.list(directoryRegex: ".*"))
+			git.pull(file)
+system.cd(pwd)

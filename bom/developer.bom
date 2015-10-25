@@ -1,0 +1,16 @@
+{ 
+	"import": [
+		"integrator"
+	],
+	"repository": [
+		{ "name": "bucket", "endpoint": "https://bitbucket.org/nablex" },
+		{ "name": "github", "endpoint": "https://github.com/nablex" }
+	],
+	"project": [
+		{ "name": "jfx-control-tree", "repository": "github" },
+		{ "name": "jfx-control-line", "repository": "github" },
+		{ "name": "eai-developer" }
+	]
+}
+
+

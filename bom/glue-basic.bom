@@ -1,0 +1,36 @@
+{ 
+	"import": [
+		"types"
+	],
+	"repository": [
+		{ "name": "github", "endpoint": "https://github.com/nablex" },
+		{ "name": "bucket", "endpoint": "https://bitbucket.org/nablex" }
+	],
+	"project": [
+		{ "name": "utils-io" },
+		{ "name": "utils-codec" },
+		{ "name": "converter-api" },
+		{ "name": "converter-base" },
+		{ "name": "validator-api" },
+		{ "name": "resources-api" },
+		{ "name": "resources-classpath" },
+		{ "name": "resources-file" },
+		{ "name": "resources-cifs" },
+		{ "name": "evaluator-api" },
+		{ "name": "artifacts-api" },
+		{ "name": "glue-api" },
+		{ "name": "glue" },
+
+		{ "name": "resources-zip" },
+		{ "name": "validator-base" },
+		{ "name": "resources-memory" },
+		{ "name": "property-api" },
+		{ "name": "glue-database" },
+		{ "name": "glue-json" },
+		{ "name": "utils-xml" },
+		{ "name": "glue-xml" },
+		{ "name": "glue-types" },
+		{ "name": "evaluator-types" }
+	]
+}
+

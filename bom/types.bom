@@ -1,0 +1,23 @@
+{ 
+	"repository": [
+		{ "name": "github", "endpoint": "https://github.com/nablex" },
+		{ "name": "bucket", "endpoint": "https://bitbucket.org/nablex" }
+	],
+	"project": [
+		{ "name": "types-api" },
+		{ "name": "types-base" },
+		{ "name": "types-java" },
+		{ "name": "types-map" },
+		{ "name": "types-xml" },
+		{ "name": "types-mask", "repository": "bucket" },
+		{ "name": "types-binding-api" },
+		{ "name": "types-binding-xml" },
+		{ "name": "types-binding-json" },
+		{ "name": "types-binding-flat" },
+		{ "name": "types-definition-api", "repository": "bucket", "branch": "develop" },
+		{ "name": "types-definition-xml", "repository": "bucket", "branch": "develop" },
+		{ "name": "types-definition-xsd", "repository": "bucket", "branch": "develop" },
+		{ "name": "types-structure", "repository": "bucket", "branch": "develop" },
+		{ "name": "types-uml", "repository": "bucket" }
+	]
+}
