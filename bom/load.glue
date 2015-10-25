@@ -1,0 +1,28 @@
+bom ?= null
+
+# Find all the bom files on the system
+all = retain(".*\.bom$", file.list(fileRegex: ".*\.bom$"))
+
+bomFile = bom + ".bom"
+
+if (exists(bomFile))
+	content = read(bomFile)
+		
+if (content == null && system.linux())
+	locate = first(lines(system.locate(bom + ".bom")))
+	if (locate ~ ".*/" + bom + ".bom$")
+		content = read(locate)
+	
+if (content == null)
+	content = read("https://raw.githubusercontent.com/nablex/boms/master/" + bom + ".bom")
+
+confirmNotNull("The bom file must exist locally or on central repository", content)
+
+content = string(content, false)
+
+# Support both xml and json defined boms
+switch
+	case(content ~ "(?s)^[\s]*<.*")
+		content = xml.objectify(content)
+	default
+		content = json.objectify(content)

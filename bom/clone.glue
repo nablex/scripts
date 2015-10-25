@@ -1,28 +1,6 @@
 bom ?= null
 
-# Find all the bom files on the system
-all = retain(".*\.bom$", lines(system.locate("bom")))
-
-bomFile = null
-for (file : all)
-	if (file ~ "(^|.*/)" + bom + "\.bom$")
-		bomFile = file
-		break
-
-switch(bomFile)
-	case(null)
-		content = string(read("https://raw.githubusercontent.com/nablex/boms/master/" + bom + ".bom"))
-	default
-		content = string(read(bomFile), false)		
-
-confirmNotNull("The bom file must exist", content)
-
-# Support both xml and json defined boms
-switch
-	case(content ~ "(?s)^[\s]*<.*")
-		content = xml.objectify(content)
-	default
-		content = json.objectify(content)
+content = bom.load(bom)/content
 
 # First load the imports
 for (import : content/import)
