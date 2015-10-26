@@ -23,7 +23,8 @@ for (project : content/project)
 	
 			if (user == null)
 				user = system.input("Existing user for " + endpoint + ": ")
-				users = array(users, structure(repository: repository, user: user))
+				if (user != "" && user != null)
+					users = array(users, structure(repository: repository, user: user))
 
 			if (user != null)
 				endpoint = replace("://", "://" + user + "@", endpoint)
